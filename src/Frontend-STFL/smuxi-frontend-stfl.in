@@ -1,3 +1,17 @@
+
 #!/bin/sh
 
-exec mono --debug "@expanded_libdir@/@PACKAGE@/smuxi-frontend-stfl.exe" "$@"
+EXE_PATH=@expanded_libdir@/@PACKAGE@
+
+if [ $SNAP ]; then
+    EXE_PATH=$SNAP/lib/smuxi
+
+    PKG_DIR=$SNAP/usr
+    export MONO_PATH=$PKG_DIR/lib/mono/4.5
+    export MONO_CONFIG=$SNAP/etc/mono/config
+    export MONO_CFG_DIR=$SNAP/etc
+    export MONO_REGISTRY_PATH=~/.mono/registry
+    export MONO_GAC_PREFIX=$PKG_DIR/lib/mono/gac/
+fi
+
+exec mono --debug "$EXE_PATH/smuxi-frontend-stfl.exe" "$@"

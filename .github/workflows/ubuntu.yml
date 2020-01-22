@@ -1,0 +1,41 @@
+name: ubuntu
+
+on: [push]
+
+# TODO: should only build/publish snap package on tags
+#on:
+#  push:
+#    tags:
+#    - '*'
+
+jobs:
+  ubuntu-snap-build:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Generate snap package
+      run: |
+        ./snap/install_snapcraft.sh
+        sudo ./snap/snap_build.sh
+
+    - name: Upload snap package as artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: snap
+        path: smuxi_1.0.99.1_amd64.snap
+
+  ubuntu-snap-upload:
+    needs: ubuntu-snap-build
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v1
+    - name: Download artifact from previous job
+      uses: actions/download-artifact@v1
+      with:
+        name: snap
+    - name: Upload snap package to Snap Store
+      env:
+        SNAPCRAFT_LOGIN: ${{ secrets.SNAPCRAFT_LOGIN }}
+      run: |
+        ./snap/install_snapcraft.sh
+        ./snap/snap_release.sh
