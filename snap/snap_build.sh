@@ -8,21 +8,10 @@ DEBIAN_FRONTEND=noninteractive apt install -y cli-common-dev \
                                               mono-xbuild \
                                               libnini-cil-dev \
                                               liblog4net-cil-dev \
-                                              libgtk2.0-cil-dev \
-                                              libgnome2.0-cil-dev \
-                                              libglade2.0-cil-dev \
                                               libglib2.0-cil-dev \
-                                              libgnome-vfs2.0-cil-dev \
-                                              libart2.0-cil-dev \
-                                              libnotify-cil-dev \
-                                              libmessagingmenu-cil-dev \
-                                              libindicate0.1-cil-dev \
-                                              libindicate-dev \
                                               libgio2.0-cil-dev \
-                                              gtk-sharp2-gapi \
                                               libdbus1.0-cil-dev \
                                               libdbus-glib1.0-cil-dev \
-                                              libgtkspell-dev \
                                               libstfl0 \
                                               libstfl-dev \
                                               lsb-release \
@@ -33,7 +22,7 @@ DEBIAN_FRONTEND=noninteractive apt install -y cli-common-dev \
                                               automake \
                                               autotools-dev
 
-./autogen.sh --prefix=`pwd`/staging
+./autogen.sh --prefix=`pwd`/staging --disable-frontend-gnome
 make
 make install
 
