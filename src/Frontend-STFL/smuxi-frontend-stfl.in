@@ -7,7 +7,7 @@ if [ $SNAP ]; then
     EXE_PATH=$SNAP/lib/smuxi
 
     PKG_DIR=$SNAP/usr
-    export MONO_PATH=$PKG_DIR/lib/mono/4.5
+    export MONO_PATH=$PKG_DIR/lib/mono/4.5:$PKG_DIR/lib/cli/log4net-1.2
     export MONO_CONFIG=$SNAP/etc/mono/config
     export MONO_CFG_DIR=$SNAP/etc
     export MONO_REGISTRY_PATH=~/.mono/registry
