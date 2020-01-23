@@ -26,6 +26,7 @@ parts:
     stage-packages:
       - mono-devel
       - liblog4net1.2-cil
+      - libnini1.1-cil
 
   certs:
     plugin: dump
