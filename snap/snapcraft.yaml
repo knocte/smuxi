@@ -25,7 +25,7 @@ parts:
     source: ./staging
     stage-packages:
       - mono-devel
-      - liblog4net-cil
+      - liblog4net1.2-cil
 
   certs:
     plugin: dump
